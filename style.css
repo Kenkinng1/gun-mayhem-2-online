@@ -100,3 +100,54 @@ code {
   margin: 0 auto;
   background: black;
 }
+
+/* Keybind configuration */
+.keybind-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 15px 0;
+}
+
+.keybind-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #0a0a1a;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.keybind-action {
+  font-size: 0.9em;
+  color: #ccc;
+}
+
+.keybind-btn {
+  background: #0f3460;
+  color: white;
+  border: 2px solid #1a4a8a;
+  padding: 6px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 1em;
+  font-weight: bold;
+  min-width: 60px;
+  text-align: center;
+}
+
+.keybind-btn:hover {
+  background: #1a4a8a;
+}
+
+.keybind-btn.listening {
+  background: #e94560;
+  border-color: #ff6b81;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}

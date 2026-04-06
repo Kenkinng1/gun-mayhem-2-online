@@ -2,16 +2,21 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8"/>
-		<title>Networked ruffle</title>
+		<title>Gun Mayhem 2 - Online Multiplayer</title>
         <script src="main.js"></script>
         <script src="https://unpkg.com/peerjs@1.3.2/dist/peerjs.min.js"></script>
         <link rel="stylesheet" href="style.css">
 	</head>
 <body>
     <div id="hostguestchoice" class="modal">
-        <h1>Player mode</h1>
-        <p>One player needs to be the host, one player needs to be the guest. Only the host will have control over the mouse.</p>
-        <p>See an explanation <a href="https://github.com/ZeusWPI/multiplayer-ruffle">here</a></p>
+        <h1>Gun Mayhem 2 - Online Multiplayer</h1>
+        <p>Play Gun Mayhem 2 with a friend over the internet! One player hosts, the other joins.</p>
+        <p><strong>Host:</strong> Runs the game and streams video to the guest.<br>
+           <strong>Guest:</strong> Watches the stream and sends keyboard inputs to the host.</p>
+        <div class="controls-info">
+            <p><strong>Player 1 (Host):</strong> Arrow keys to move, <code>.</code> to shoot, <code>,</code> to throw</p>
+            <p><strong>Player 2 (Guest):</strong> WASD to move, <code>Q</code> to shoot, <code>E</code> to throw</p>
+        </div>
         <form class="button-row">
             <button onclick="click_host()">HOST</button>
             <button onclick="click_guest()">GUEST</button>
@@ -20,6 +25,6 @@
     <div id="connectiondetails" class="modal"></div>
     <div id="container"></div>
     <video id="receiving-video"></video>
-    <script src="https://unpkg.com/@ruffle-rs/ruffle@0.1.0-nightly.2023.9.14"></script>
+    <script src="https://unpkg.com/@ruffle-rs/ruffle@0.1.0-nightly.2024.10.3"></script>
 </body>
 </html>

@@ -1,38 +1,102 @@
 html {
-  background: #008effff;
+  background: #1a1a2e;
   font: sans-serif;
 }
 
+body {
+  margin: 0;
+  padding: 20px;
+}
+
 .modal {
-  background-color: #3977aa;
-  margin: auto;
+  background-color: #16213e;
+  margin: 40px auto;
   max-width: 40em;
   padding: 15px;
   font-family: sans-serif;
-  color: white;
+  color: #e0e0e0;
+  border-radius: 8px;
+  border: 1px solid #0f3460;
 }
 
 .modal:empty {
   padding: 0;
+  border: none;
 }
 
 .modal h1 {
-  width: 100%;
-  margin: -15px;
-  margin-bottom: 0;
-  background: #203155;
-  border-bottom: solid 1px black;
-  padding: 5px 15px;
+  width: calc(100% + 30px);
+  margin: -15px -15px 15px -15px;
+  background: #0f3460;
+  border-bottom: solid 2px #e94560;
+  padding: 12px 15px;
+  border-radius: 8px 8px 0 0;
+  font-size: 1.3em;
+}
+
+.controls-info {
+  background: #0a0a1a;
+  padding: 10px 15px;
+  border-radius: 6px;
+  margin: 10px 0;
+}
+
+.controls-info p {
+  margin: 5px 0;
+  font-size: 0.9em;
+}
+
+code {
+  background: #e94560;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+  color: white;
 }
 
 #connectiondetails input {
   display: block;
   margin: 10px auto;
-  overflow-wrap: break-word
+  overflow-wrap: break-word;
+  font-family: monospace;
+  padding: 8px;
+  background: #0a0a1a;
+  border: 1px solid #0f3460;
+  color: white;
+  border-radius: 4px;
 }
 
 .button-row {
   display: flex;
   justify-content: center;
   gap: 50px;
+  margin-top: 15px;
+}
+
+.button-row button {
+  background: #e94560;
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  font-size: 1.1em;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: sans-serif;
+}
+
+.button-row button:hover {
+  background: #ff6b81;
+}
+
+#container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+#receiving-video {
+  display: block;
+  max-width: 960px;
+  margin: 0 auto;
+  background: black;
 }

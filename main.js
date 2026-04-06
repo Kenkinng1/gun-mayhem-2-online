@@ -18,7 +18,7 @@ function on_host_load() {
     player.style.width = "100%";
     player.style.height = "800px";
     container.appendChild(player);
-    player.load("tank-trouble.swf");
+    player.load("gun-mayhem-2.swf");
     const peer = new Peer();
     console.log("peer=", peer);
     peer.on('open', function(id) {

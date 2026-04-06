@@ -146,7 +146,6 @@ function on_host_load() {
             console.log("Keyboard connection established");
             // Receive messages
             conn.on('data', function(data) {
-                console.log("received data", data);
                 window.dispatchEvent(new KeyboardEvent(data["type"], {
                     code: data['code'],
                 }));
@@ -159,16 +158,57 @@ function on_host_load() {
         const canvasElt = document.querySelector("ruffle-player")?.shadowRoot.querySelector("canvas");
         if (canvasElt != null) {
             console.log("Canvas exists, setting up call now");
-            const stream = canvasElt.captureStream(30); // FPS
+            const stream = canvasElt.captureStream(60); // FPS
             const video_track = stream.getVideoTracks()[0];
             video_track.contentHint = "motion";
             var call = p.call(guest_video_id, stream);
             console.log("stream=", stream);
+            // Tune sender for low-latency: prioritize framerate, raise bitrate ceiling
+            tuneVideoSender(call);
             clearInterval(callIntervalId);
         } else {
             console.log("canvas still null");
         }
     }, 1000, videopeer);
+}
+
+function tuneVideoSender(call) {
+    // Wait for the underlying RTCPeerConnection to have senders, then tune
+    var attempts = 0;
+    var tuneInterval = setInterval(function() {
+        attempts++;
+        if (attempts > 30) { clearInterval(tuneInterval); return; }
+        try {
+            var pc = call.peerConnection;
+            if (!pc) return;
+            var senders = pc.getSenders();
+            var videoSender = null;
+            for (var i = 0; i < senders.length; i++) {
+                if (senders[i].track && senders[i].track.kind === 'video') {
+                    videoSender = senders[i];
+                    break;
+                }
+            }
+            if (!videoSender) return;
+            var params = videoSender.getParameters();
+            if (!params.encodings || params.encodings.length === 0) {
+                params.encodings = [{}];
+            }
+            params.encodings[0].maxBitrate = 6000000; // 6 Mbps ceiling
+            params.encodings[0].maxFramerate = 60;
+            params.encodings[0].networkPriority = 'high';
+            params.encodings[0].priority = 'high';
+            params.degradationPreference = 'maintain-framerate';
+            videoSender.setParameters(params).then(function() {
+                console.log('Video sender tuned for low latency');
+            }).catch(function(e) {
+                console.warn('setParameters failed', e);
+            });
+            clearInterval(tuneInterval);
+        } catch (e) {
+            console.warn('tuneVideoSender error', e);
+        }
+    }, 200);
 }
 
 function transmitKeystroke(conn, type, event) {
@@ -177,7 +217,6 @@ function transmitKeystroke(conn, type, event) {
     if (guestKeyMap[code]) {
         code = guestKeyMap[code];
     }
-    console.log("transmitting ", type, code);
     conn.send({type: type, code: code});
 }
 

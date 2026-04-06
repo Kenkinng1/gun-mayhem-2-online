@@ -17,8 +17,8 @@ var guestKeyMap = {
     "ArrowDown": "KeyS",
     "ArrowLeft": "KeyA",
     "ArrowRight": "KeyD",
-    "Period": "KeyQ",
-    "Comma": "KeyE",
+    "ShiftLeft": "KeyQ",
+    "KeyE": "KeyE",
 };
 
 // The game actions and their default Player 2 codes
@@ -31,14 +31,14 @@ var gameActions = [
     { name: "Throw",      gameCode: "KeyE" },
 ];
 
-// Default guest bindings (arrow keys + ./, — same layout as Player 1)
+// Default guest bindings (arrow keys + L-Shift/E — same layout as host)
 var defaultGuestBindings = {
     "Move Up": "ArrowUp",
     "Move Down": "ArrowDown",
     "Move Left": "ArrowLeft",
     "Move Right": "ArrowRight",
-    "Shoot": "Period",
-    "Throw": "Comma",
+    "Shoot": "ShiftLeft",
+    "Throw": "KeyE",
 };
 
 function codeToLabel(code) {
